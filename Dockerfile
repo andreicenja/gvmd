@@ -13,9 +13,9 @@ RUN set -ex; \
     apt download openvas-scanner; \
     dpkg --fsys-tarfile openvas-scanner_*.deb | tar xf - ./usr/sbin/greenbone-nvt-sync; \
     rm -rf ./openvas-scanner_*.deb; \
-    rm -rf /var/lib/apt/lists/*
-	cp /usr/share/doc/msmtp/examples/msmtprc-system.example /etc/msmtprc && \
-	sed -i '/^#auto_from on.*/s/^#//' /etc/msmtprc
+    rm -rf /var/lib/apt/lists/*; \
+    cp /usr/share/doc/msmtp/examples/msmtprc-system.example /etc/msmtprc; \
+    sed -i '/^#auto_from on.*/s/^#//' /etc/msmtprc
 
 ENV GVMD_POSTGRESQL_URI="postgresql://gvmduser:password@postgres:5432/gvmd?application_name=gvmd" \
     GVMD_USER=admin
