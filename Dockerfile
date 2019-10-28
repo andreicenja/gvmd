@@ -23,6 +23,9 @@ VOLUME /var/lib/gvm/
 EXPOSE 9390
 
 COPY docker-entrypoint.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["gvmd", "-f", "--listen=0.0.0.0", "--port=9390"]
