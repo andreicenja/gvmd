@@ -3,7 +3,7 @@ MAINTAINER Mohammad Razavi <mrazavi64@gmail.com>
 
 RUN set -ex; \
     apt update; \
-    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gnupg sendmail; \
+    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gnupg sendmail msmtp-mta; \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3C453D244AA450E0; \
     echo "deb http://ppa.launchpad.net/mrazavi/gvm/ubuntu bionic main" > /etc/apt/sources.list.d/mrazavi-ubuntu-gvm-bionic.list; \
     apt update; \
@@ -14,6 +14,8 @@ RUN set -ex; \
     dpkg --fsys-tarfile openvas-scanner_*.deb | tar xf - ./usr/sbin/greenbone-nvt-sync; \
     rm -rf ./openvas-scanner_*.deb; \
     rm -rf /var/lib/apt/lists/*
+	cp /usr/share/doc/msmtp/examples/msmtprc-system.example /etc/msmtprc && \
+	sed -i '/^#auto_from on.*/s/^#//' /etc/msmtprc
 
 ENV GVMD_POSTGRESQL_URI="postgresql://gvmduser:password@postgres:5432/gvmd?application_name=gvmd" \
     GVMD_USER=admin
