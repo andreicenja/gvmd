@@ -23,6 +23,7 @@ VOLUME /var/lib/gvm/
 EXPOSE 9390
 
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY msmtprc /etc/
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
