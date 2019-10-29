@@ -33,11 +33,15 @@ if [ "$1" = 'gvmd' ]; then
     fi
 fi
 
-# if we get the SMTP_SERVER from env, replace it in the msmtp config
+# if we get the SMTP_SERVER and $MAIL_DOMAIN from env, replace in the msmtp config
 if [ ! -z "$SMTP_SERVER" ] && [ -z "$(cat /etc/msmtprc | grep $SMTP_SERVER)" ]; then
 	sed -i "s/^host.*/host $SMTP_SERVER/g" /etc/msmtprc
 fi
 
-sed -i "s/^#maildomain.*/maildomain $(hostname)/g" /etc/msmtprc
+if [ ! -z "$MAIL_DOMAIN" ] && [ -z "$(cat /etc/msmtprc | grep $MAIL_DOMAIN)" ]; then
+	sed -i "s/^maildomain.*/maildomain $MAIL_DOMAIN/g" /etc/msmtprc
+fi
+
+#sed -i "s/^#maildomain.*/maildomain $(hostname)/g" /etc/msmtprc
 
 exec "$@"
