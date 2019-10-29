@@ -3,7 +3,7 @@ MAINTAINER Mohammad Razavi <mrazavi64@gmail.com>
 
 RUN set -ex; \
     apt update; \
-    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gnupg msmtp-mta; \
+    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gnupg msmtp-mta texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra; \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3C453D244AA450E0; \
     echo "deb http://ppa.launchpad.net/mrazavi/gvm/ubuntu bionic main" > /etc/apt/sources.list.d/mrazavi-ubuntu-gvm-bionic.list; \
     apt update; \
