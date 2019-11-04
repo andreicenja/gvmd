@@ -19,6 +19,9 @@ if [ "$1" = 'gvmd' ]; then
     if [ "${FORCE_DB_INIT}" = "1" ] || [ ! -e /var/lib/gvm/.db-init ]; then
 	echo "running db initializion script..."
 	psql -f/usr/share/dbconfig-common/data/gvmd-pg/install-dbadmin/pgsql "${GVMD_POSTGRESQL_URI}"
+	sleep 200
+	psql -f/var/lib/postgresql/data/eeaopenvasgvmd.dump "${GVMD_POSTGRESQL_URI}"
+	psql -f/var/lib/postgresql/data/eeaopenvastasks.dump "${GVMD_POSTGRESQL_URI}"
 
 	echo "migrating the database..."
 	gvmd --migrate
